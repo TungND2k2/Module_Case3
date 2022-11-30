@@ -14,17 +14,11 @@ const user_Controller = new UserController()
 
 
 const AdminController = new adminController()
-const LoginController = require("./controller/login.controller");
-const loginController = new LoginController()
-const RegisterController = require("./controller/register.controller");
-const ForgotController = require("./controller/forgot.controller");
-const registerController = new RegisterController();
-const forgotController = new ForgotController();
+
 
 const adminProductController = require('./controller/Admin.product.controller');
 const  AdminProductController = new adminProductController()
-const SearchController= require('./controller/search.controller');
-const searchController = new SearchController();
+
 const server = http.createServer((req, res) => {
 
     let urlPath = url.parse(req.url);
@@ -38,14 +32,13 @@ const server = http.createServer((req, res) => {
         case '/forgot':
             user_Controller.forgot(req, res);
             break;
-        case '/show/user':
+        case '/show/users':
             AdminController.showUser(req, res);
             break;
 
         case '/delete/user':
             console.log(1)
             AdminController.deleteUser(req, res);
-
             break;
         case '/search':
             orderController.searchData(req, res)
@@ -53,8 +46,6 @@ const server = http.createServer((req, res) => {
         case '/home':
             orderController.mainPage(req, res);
             break;
-
-
         case'/product':
             AdminProductController.showProduct(req,res);
             break;
@@ -67,19 +58,11 @@ const server = http.createServer((req, res) => {
         case'/edit':
             AdminProductController.editProduct(req,res);
             break;
-
-
         case '/logOut':
             user_Controller.logout(req, res);
             break;
-
-
-
-
-
-
-
-
+        default :
+            res.end();
     }
 
 
