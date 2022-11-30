@@ -22,22 +22,12 @@ const RegisterController = require("./controller/register.controller");
 const ForgotController = require("./controller/forgot.controller");
 const registerController = new RegisterController();
 const forgotController = new ForgotController();
-<<<<<<< HEAD
-const SearchController= require('./controller/search.controller');
-const searchController = new SearchController();
-const server = http.createServer((req, res) => {
-=======
 
 const adminProductController = require('./controller/Admin.product.controller');
 const  AdminProductController = new adminProductController()
-
-const server=http.createServer((req, res)=>{
-
 const SearchController= require('./controller/search.controller');
 const searchController = new SearchController();
 const server = http.createServer((req, res) => {
-
->>>>>>> 2005d607fd7a548a9df93a5930e87fe1d0fe9bc9
     let urlPath = url.parse(req.url);
     switch (urlPath.pathname) {
         case '/login':
