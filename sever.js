@@ -3,19 +3,28 @@ const PORT = 8000;
 const url = require('url');
 
 
+
 const OrderController = require("./controller/UserPage.controller");
 const orderController=new OrderController()
+
 const adminController = require('./controller/Admin.Home.controller')
 const userController = new adminController()
 const UserController = require("./controller/User.controller");
 const user_Controller = new UserController()
 
 
+const AdminController = new adminController()
+const LoginController = require("./controller/login.controller");
+const loginController = new LoginController()
+const RegisterController = require("./controller/register.controller");
+const ForgotController = require("./controller/forgot.controller");
+const registerController = new RegisterController();
+const forgotController = new ForgotController();
 
 const adminProductController = require('./controller/Admin.product.controller');
 const  AdminProductController = new adminProductController()
-
-
+const SearchController= require('./controller/search.controller');
+const searchController = new SearchController();
 const server = http.createServer((req, res) => {
 
     let urlPath = url.parse(req.url);
@@ -29,11 +38,14 @@ const server = http.createServer((req, res) => {
         case '/forgot':
             user_Controller.forgot(req, res);
             break;
-        case '/admin':
-            userController.index(req, res);
+        case '/show/user':
+            AdminController.showUser(req, res);
             break;
-        case '/delete':
-            userController.deleteUser(req, res);
+
+        case '/delete/user':
+            console.log(1)
+            AdminController.deleteUser(req, res);
+
             break;
         case '/search':
             orderController.searchData(req, res)
@@ -44,9 +56,9 @@ const server = http.createServer((req, res) => {
 
 
         case'/product':
-            AdminProductController.index(req,res);
+            AdminProductController.showProduct(req,res);
             break;
-        case'/deleteproduct':
+        case'/delete/product':
             AdminProductController.deleteproduct(req,res);
             break;
         case'/add':
@@ -56,9 +68,11 @@ const server = http.createServer((req, res) => {
             AdminProductController.editProduct(req,res);
             break;
 
+
         case '/logOut':
             user_Controller.logout(req, res);
             break;
+
 
 
 

@@ -5,7 +5,7 @@ const url = require("url");
 const qs = require("qs");
 
 class AdminProductController extends BaseController {
-    async index(req, res) {
+    async showProduct(req, res) {
         const sql = 'SELECT * FROM products';
         let products = await this.querySQL(sql);
 
@@ -19,7 +19,7 @@ class AdminProductController extends BaseController {
             html += `<td>${product.price_product}</td>`;
             html += `<td>${product.quantity}</td>`;
             html += `<td>${product.type_product}</td>`;
-            html += `<td> <a href="/deleteproduct?id=${product.ID_product}" onclick="return confirm('Are you sure ?')" <button class="btn btn-danger">Delete</button></a> </td>`;
+            html += `<td> <a href="/delete/product?id=${product.ID_product}" onclick="return confirm('Are you sure ?')" <button class="btn btn-danger">Delete</button></a> </td>`;
             html += `<td> <a href="/edit?id=${product.ID_product}"  <button class="btn btn-danger">Edit</button></a> </td>`;
 
             html += "</tr>";
