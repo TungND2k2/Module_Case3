@@ -4,20 +4,25 @@ const fs = require('fs');
 const qs = require('qs');
 class UserController extends BaseController {
     async login(req, res) {
-        let pathUrl = req.url
         if (req.method === 'GET' ) {
             let cookie = req.headers.cookie;
             let sessionID = qs.parse(cookie,  { delimiter: /[;,]/ }).uId
             let dataFormLogin = await _handle.getTemplate('./view/User_Accound/login.html');
-            fs.readFile("sessions/" + sessionID + ".txt", (err, data) => {
+            fs.readFile("sessions/" + sessionID + ".txt", 'utf8',(err, data) => {
                     if (err) {
                         res.writeHead(200, {'Content-type': "text/html"});
                         res.write(dataFormLogin);
                         return res.end();
                     }
-                    res.writeHead(301, {Location: '/home'})
-                    return res.end();
-
+                data=JSON.parse(data)
+                console.log(data)
+                    if(data.user.role ===1){
+                        res.writeHead(301, {Location: '/show/users'});
+                    }
+                    else {
+                        res.writeHead(301, {Location: '/home'});
+                    }
+                    res.end()
             })
         } else {
             let data = ""
@@ -26,27 +31,51 @@ class UserController extends BaseController {
             })
             req.on('end', async () => {
                 let dataLogin = qs.parse(data);
+                let sqlRole=`select * from account where user_name='${dataLogin.username}'`;
+                let role=await this.querySQL(sqlRole);
                 let sql = `SELECT COUNT(ID_acc) as totalUser FROM account WHERE user_name = "${dataLogin.username}" AND password = "${dataLogin.password}"`;
                 let result = await this.querySQL(sql);
                 if (result[0].totalUser === 0) {
                     res.writeHead(301, {Location: '/login'})
                     res.end();
                 } else {
-                    let data = {
-                        user: {
-                            username: dataLogin.username,
-                            password: dataLogin.password,
-                        },
-                        expires: Date.now() + 60 * 1000 * 2
+                    if(role[0].role===1){
+                        let dataAdmin = {
+                            user: {
+                                username: dataLogin.username,
+                                password: dataLogin.password,
+                                role:role[0].role
+                            },
+                            expires: Date.now() + 60 * 1000 * 2
+                        }
+
+                        let nameFile = Date.now();
+
+                        let session = JSON.stringify(dataAdmin);
+                        let writeFile = await _handle.writeFile(nameFile, session);
+                        res.setHeader('Set-Cookie',"uId=" + JSON.stringify(nameFile));
+                        res.writeHead(301, {Location: '/show/users'});
+                        res.end();
+                    }
+                    else {
+                        let dataUser = {
+                            user: {
+                                username: dataLogin.username,
+                                password: dataLogin.password,
+                                role:role[0].role
+                            },
+                            expires: Date.now() + 60 * 1000 * 2
+                        }
+
+                        let nameFile = Date.now();
+
+                        let session = JSON.stringify(dataUser);
+                        let writeFile = await _handle.writeFile(nameFile, session);
+                        res.setHeader('Set-Cookie',"uId=" + JSON.stringify(nameFile));
+                        res.writeHead(301, {Location: '/home'});
+                        res.end();
                     }
 
-                    let nameFile = Date.now();
-
-                    let session = JSON.stringify(data);
-                    let writeFile = await _handle.writeFile(nameFile, session);
-                    res.setHeader('Set-Cookie',"uId=" + JSON.stringify(nameFile));
-                    res.writeHead(301, {Location: '/home'});
-                    res.end();
                 }
             })
         }
@@ -55,7 +84,7 @@ class UserController extends BaseController {
 
         let cookie = req.headers.cookie;
         let sessionID = qs.parse(cookie,  { delimiter: /[;,]/ }).uId
-        let dataFormLogin = await _handle.getTemplate('./view/HomePage.html');
+        let dataFormLogin = await _handle.getTemplate('./view/User_Page/HomePage.html');
         fs.unlink("sessions/" + sessionID + ".txt", (err) => {
             if (err) {
                 res.writeHead(200, {'Content-type': "text/html"});
