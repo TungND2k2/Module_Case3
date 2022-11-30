@@ -14,7 +14,6 @@ const adminController = require('./controller/Admin.Home.controller')
 
 const adminController = require('./controller/Admin.Home')
 
->>>>>>> 2005d607fd7a548a9df93a5930e87fe1d0fe9bc9
 const userController = new adminController()
 const LoginController = require("./controller/login.controller");
 const loginController = new LoginController()
@@ -52,8 +51,7 @@ const server = http.createServer((req, res) => {
         case '/home':
             orderController.index(req, res);
             break;
-<<<<<<< HEAD
-=======
+
 
         case'/product':
             AdminProductController.index(req,res);
@@ -72,7 +70,7 @@ const server = http.createServer((req, res) => {
 
 
 
->>>>>>> 2005d607fd7a548a9df93a5930e87fe1d0fe9bc9
+
     }
 
 
