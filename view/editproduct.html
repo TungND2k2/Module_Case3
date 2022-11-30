@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="product">Sản Phẩm</a>
+          <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
@@ -42,27 +42,33 @@
   </nav>
   <div class="container">
     <div class="row">
-      <h2>User Manager</h2>
-      <div class="col-12 col-md-12">
-        <table class="table table-striped table-bordered">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>UserName</th>
-            <th>Password</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          {list-user}
-          </tbody>
-        </table>
-      </div>
+      <h2>Edit Product</h2>
     </div>
-
-
   </div>
 </div>
+
+<form method="post" action="">
+  <label for="input1">Name Product</label>
+  <div class="input-group mb-3">
+    <input id="input1" type="text" class="form-control" placeholder="Name product" name="Productname" >
+  </div>
+  <label for="input2">Price</label>
+  <div class="input-group mb-3">
+    <input id="input2" type="text" class="form-control" placeholder="Price Product" name="Price" >
+  </div>
+  <label for="input3">Quantity</label>
+  <div class="input-group mb-3">
+    <input id="input3" type="text" class="form-control" placeholder="Quantity" name="Quantity" >
+  </div>
+  <label for="input4">Type Product</label>
+  <div class="input-group mb-3">
+    <input id="input4" type="text" class="form-control" placeholder="Type Product" name="Type_Product" >
+  </div>
+  <div>
+    <a href="/edit" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">Edit</button></a>
+  </div>
+</form>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -74,5 +80,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-</body>
-</html>
