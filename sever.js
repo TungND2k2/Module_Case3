@@ -3,18 +3,12 @@ const PORT = 8000;
 const url = require('url');
 
 const OrderController = require("./controller/home.controller");
-<<<<<<< HEAD
-const orderController = new OrderController()
-const adminController = require('./controller/Admin.Home')
-=======
 
-const orderController=new OrderController()
+const orderController = new OrderController()
+
 const adminController = require('./controller/Admin.Home.controller')
 
-
-const adminController = require('./controller/Admin.Home')
-
-const userController = new adminController()
+const AdminController = new adminController()
 const LoginController = require("./controller/login.controller");
 const loginController = new LoginController()
 const RegisterController = require("./controller/register.controller");
@@ -38,12 +32,12 @@ const server = http.createServer((req, res) => {
         case '/forgot':
             forgotController.forgot(req, res);
             break;
-        case '/admin':
-            userController.index(req, res);
+        case '/show/user':
+            AdminController.showUser(req, res);
             break;
-        case '/delete':
+        case '/delete/user':
             console.log(1)
-            userController.deleteUser(req, res);
+            AdminController.deleteUser(req, res);
             break;
         case '/search':
             searchController.index(req, res)
@@ -54,9 +48,9 @@ const server = http.createServer((req, res) => {
 
 
         case'/product':
-            AdminProductController.index(req,res);
+            AdminProductController.showProduct(req,res);
             break;
-        case'/deleteproduct':
+        case'/delete/product':
             AdminProductController.deleteproduct(req,res);
             break;
         case'/add':
@@ -65,11 +59,6 @@ const server = http.createServer((req, res) => {
         case'/edit':
             AdminProductController.editProduct(req,res);
             break;
-
-
-
-
-
 
     }
 
