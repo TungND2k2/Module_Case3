@@ -11,16 +11,17 @@ class AdminProductController extends BaseController {
 
         let html = "";
 
-        products.forEach((product, index) => {
+        products.forEach((product) => {
             html += "<tr>";
 
             html += `<td>${product.ID_product}</td>`;
+            html += `<td><img src="${product.link_img}" alt=""></td>`;
             html += `<td>${product.name_product}</td>`;
             html += `<td>${product.price_product}</td>`;
             html += `<td>${product.quantity}</td>`;
             html += `<td>${product.type_product}</td>`;
             html += `<td> <a href="/delete/product?id=${product.ID_product}" onclick="return confirm('Are you sure ?')" <button class="btn btn-danger">Delete</button></a> </td>`;
-            html += `<td> <a href="/edit?id=${product.ID_product}"  <button class="btn btn-danger">Edit</button></a> </td>`;
+            html += `<td> <a href="/edit/product?id=${product.ID_product}"  <button class="btn btn-info">Edit</button></a> </td>`;
 
             html += "</tr>";
         })
@@ -35,7 +36,6 @@ class AdminProductController extends BaseController {
         let parseUrl = url.parse(req.url, true);
         let path = parseUrl.query;
         let index = qs.parse(path);
-        console.log(index)
         let id=+index.id;
         const sql = `delete from products where ID_product = ${id}`;
         await this.querySQL(sql);
@@ -48,14 +48,13 @@ class AdminProductController extends BaseController {
         let parseUrl = url.parse(req.url, true);
         let path = parseUrl.query;
         let index = qs.parse(path);
-        console.log(index)
         let id = +index.id;
         let urlPath = req.method
         if (urlPath === 'GET') {
             let sqlpro = `select * from products where ID_product = ${id}`
             let product = await this.querySQL(sqlpro);
             let dataEdit = await _handle.getTemplate('./view/admin/editproduct.html')
-            dataEdit =dataEdit.replace('{input-name}', `<input type="text" value="${product[0].name_product}" class="form-control" placlassNameder="Name Product" name="name">`);
+            dataEdit =dataEdit.replace('{input-name}', `<input width="100px" type="text" value="${product[0].name_product}" class="form-control" placlassNameder="Name Product" name="name">`);
             dataEdit = dataEdit.replace('{input-price}',`<input  type="text" value="${product[0].price_product}" class="form-control" placeholder="Price Product" name="Price" >`);
             dataEdit =dataEdit.replace('{input-quantity}',`<input  type="text" value="${product[0].quantity}" class="form-control" placeholder="Quantity" name="Quantity" >`);
             dataEdit = dataEdit.replace('{input-type}',`<input  type="text" value="${product[0].type_product}"  class="form-control" placeholder="Type Product" name="Type_Product" >`);

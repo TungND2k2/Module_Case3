@@ -5,6 +5,7 @@ const OrderController = require("./controller/UserPage.controller");
 const orderController = new OrderController()
 
 const adminController = require('./controller/Admin.Home.controller')
+
 const AdminController = new adminController()
 const UserController = require("./controller/User.controller");
 const user_Controller = new UserController()
@@ -26,7 +27,7 @@ const server = http.createServer((req, res) => {
         case '/register':
             user_Controller.register(req, res);
             break;
-        case '/forgot':
+        case '/recovery':
             user_Controller.forgot(req, res);
             break;
         case '/show/users':
@@ -34,7 +35,6 @@ const server = http.createServer((req, res) => {
             break;
 
         case '/delete/user':
-            console.log(1)
             AdminController.deleteUser(req, res);
             break;
         case '/search':
@@ -49,16 +49,16 @@ const server = http.createServer((req, res) => {
         case'/delete/product':
             AdminProductController.deleteproduct(req, res);
             break;
-        case'/add':
+        case'/add/product':
             AdminProductController.addProduct(req, res);
             break;
-        case'/edit':
+        case'/edit/product':
             AdminProductController.editProduct(req, res);
             break;
         case '/logOut':
             user_Controller.logout(req, res);
             break;
-        case'/info':
+        case'/info/user':
             orderController.InfoUser(req,res);
             break;
         case'/edit/user':

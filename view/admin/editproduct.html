@@ -13,17 +13,14 @@
 <body>
 <div class="container">
   <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #2d2016;">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/show/users">Home</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="/add/product">ADD Products</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
@@ -48,28 +45,28 @@
 </div>
 
 <form method="post" action="">
-  <label >Name Product</label>
-  <div class="input-group mb-3">
+  <label style="margin-left: 270px">Name Product</label>
+  <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
     {input-name}
   </div>
-  <label >Price</label>
-  <div class="input-group mb-3">
+  <label style="margin-left: 270px">Price</label>
+  <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
     {input-price}
   </div>
-  <label >Quantity</label>
-  <div class="input-group mb-3">
+  <label style="margin-left: 270px">Quantity</label>
+  <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
     {input-quantity}
   </div>
-  <label >Type Product</label>
-  <div class="input-group mb-3">
+  <label style="margin-left: 270px">Type Product</label>
+  <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
     {input-type}
   </div>
-  <label >Link img</label>
-  <div class="input-group mb-3">
+  <label style="margin-left: 270px" >Link img</label>
+  <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
    {input-link-img}
   </div>
   <div>
-    <a href="/edit" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">Edit</button></a>
+    <a style="margin-left: 270px" href="/edit" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">Edit</button></a>
   </div>
 </form>
 

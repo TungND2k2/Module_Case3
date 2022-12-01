@@ -16,6 +16,7 @@ class OrderController extends BaseController {
         orders.forEach((order, index) => {
             html += "<tr>";
             html += `<td>${index + 1}</td>`;
+            html += `<td><img src="${order.link_img}" alt=""></td>`;
             html += `<td>${order.name_product}</td>`;
             html += `<td>${order.price_product}</td>`;
             html += `<td>${order.quantity}</td>`;
@@ -50,13 +51,16 @@ class OrderController extends BaseController {
             result.forEach((products, index) => {
                 html += "<tr>";
                 html += `<td>${index + 1}</td>`;
+                html += `<td><img src="${products.link_img}" alt=""></td>`;
                 html += `<td>${products.name_product}</td>`;
                 html += `<td>${products.price_product}</td>`;
                 html += `<td>${products.quantity}</td>`;
                 html += `<td>${products.type_product}</td>`;
+                html += `<td><a href="add/cart?id=${products.ID_product}"><button class="btn btn-danger">Add</button></a></td>`
+
                 html += "</tr>";
             })
-            let dataSearch = await _handle.getTemplate('./view/User_Page/Search.html')
+            let dataSearch = await _handle.getTemplate('./view/User_Page/HomePage.html')
             dataSearch = dataSearch.replace('{list-user}', html)
             res.writeHead(200, {'Content-type': 'text/html'});
             res.write(dataSearch);
@@ -80,12 +84,12 @@ class OrderController extends BaseController {
             html += `<td>${user.password}</td>`;
             html += `<td>${user.email}</td>`;
             html += `<td>${user.phone}</td>`;
-            html += `<td> <a href="edit/user?id=${user.ID_acc}"  <button class="btn btn-danger">Edit</button></a> </td>`;
+            html += `<td> <a href="/edit/user?id=${user.ID_acc}"  <button class="btn btn-info">Edit</button></a> </td>`;
 
             html += "</tr>";
         })
 
-        let data = await _handle.getTemplate('./view/User_Page/infouser.html')
+        let data = await _handle.getTemplate('./view/User_Page/Infor_User.html')
         data = data.replace('{info-user}', html)
         res.writeHead(200, {'Content-type': 'text/html'});
         res.write(data);

@@ -35,7 +35,6 @@ class AdminController extends BaseController {
              let parseUrl = url.parse(req.url, true);
              let path = parseUrl.query;
              let index = qs.parse(path);
-         console.log(index)
              let id=+index.id;
              const sql = `delete from account where ID_acc = ${id}`;
              await this.querySQL(sql);
