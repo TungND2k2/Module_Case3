@@ -15,7 +15,6 @@ class UserController extends BaseController {
                         return res.end();
                     }
                 data=JSON.parse(data)
-                console.log(data)
                     if(data.user.role ===1){
                         res.writeHead(301, {Location: '/show/users'});
                     }
@@ -81,9 +80,8 @@ class UserController extends BaseController {
         }
     }
     async logout(req, res) {
-
         let cookie = req.headers.cookie;
-        let sessionID = qs.parse(cookie,  { delimiter: /[;,]/ }).uId
+        let sessionID = qs.parse(cookie,  { delimiter: /[;,]/ }).uId;
         let dataFormLogin = await _handle.getTemplate('./view/User_Page/HomePage.html');
         fs.unlink("sessions/" + sessionID + ".txt", (err) => {
             if (err) {
@@ -112,10 +110,12 @@ class UserController extends BaseController {
 
                 let dataLogin = qs.parse(data);
                 let name=dataLogin.name;
+                let phone=dataLogin.phone;
+                let email=dataLogin.email;
                 let password=dataLogin.password;
                 let repeatPassword=dataLogin.repeatPassword;
-                if(repeatPassword===password && password.length >6){
-                    let sql = `Insert into account(user_name,password) value ('${name}', '${password}')`;
+                if(repeatPassword===password && password.length >=6){
+                    let sql = `Insert into account(user_name,password,email,phone) value ('${name}', '${password}','${email}','${phone}')`;
                     let result = await this.querySQL(sql);
                     res.writeHead(301, {Location: '/login'})
                     res.end();
@@ -147,13 +147,13 @@ class UserController extends BaseController {
                 let name = dataLogin.name;
                 let password = dataLogin.password;
                 let repeatPassword = dataLogin.repeatPassword;
-                if (repeatPassword === password && password.length > 6) {
+                if (repeatPassword === password && password.length > 6 ) {
                     let sql = `update  account set password='${password}' where user_name='${name}'  `;
                     let result = await this.querySQL(sql);
                     res.writeHead(301, {Location: '/login'})
                     res.end();
                 } else {
-                    res.writeHead(301, {Location: '/register'})
+                    res.writeHead(301, {Location: '/forgot'})
                     res.end();
                 }
             })

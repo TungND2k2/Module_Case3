@@ -8,7 +8,6 @@ const OrderController = require("./controller/UserPage.controller");
 const orderController=new OrderController()
 
 const adminController = require('./controller/Admin.Home.controller')
-const userController = new adminController()
 const UserController = require("./controller/User.controller");
 const user_Controller = new UserController()
 
@@ -29,7 +28,7 @@ const server = http.createServer((req, res) => {
         case '/register':
             user_Controller.register(req, res);
             break;
-        case '/forgot':
+        case '/recovery':
             user_Controller.forgot(req, res);
             break;
         case '/show/users':
@@ -56,7 +55,7 @@ const server = http.createServer((req, res) => {
            AdminProductController.addProduct(req,res);
             break;
         case'/edit':
-            AdminProductController.editProduct(req,res);
+             AdminProductController.editProduct(req,res);
             break;
         case '/logOut':
             user_Controller.logout(req, res);
