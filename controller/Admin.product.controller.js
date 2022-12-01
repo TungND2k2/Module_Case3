@@ -25,7 +25,7 @@ class AdminProductController extends BaseController {
             html += "</tr>";
         })
 
-        let data = await _handle.getTemplate('./view/admin.product.html')
+        let data = await _handle.getTemplate('./view/admin/list.product.html')
         data = data.replace('{list-product}', html)
         res.writeHead(200, {'Content-type': 'text/html'});
         res.write(data);
@@ -52,7 +52,14 @@ class AdminProductController extends BaseController {
         let id = +index.id;
         let urlPath = req.method
         if (urlPath === 'GET') {
-            let dataEdit = await _handle.getTemplate('./view/editproduct.html')
+            let sqlpro = `select * from products where ID_product = ${id}`
+            let product = await this.querySQL(sqlpro);
+            let dataEdit = await _handle.getTemplate('./view/admin/editproduct.html')
+            dataEdit =dataEdit.replace('{input-name}', `<input type="text" value="${product[0].name_product}" class="form-control" placlassNameder="Name Product" name="name">`);
+            dataEdit = dataEdit.replace('{input-price}',`<input  type="text" value="${product[0].price_product}" class="form-control" placeholder="Price Product" name="Price" >`);
+            dataEdit =dataEdit.replace('{input-quantity}',`<input  type="text" value="${product[0].quantity}" class="form-control" placeholder="Quantity" name="Quantity" >`);
+            dataEdit = dataEdit.replace('{input-type}',`<input  type="text" value="${product[0].type_product}"  class="form-control" placeholder="Type Product" name="Type_Product" >`);
+            dataEdit = dataEdit.replace('{input-link-img}',` <input  type="text" value="${product[0].link_img}" class="form-control" placeholder="Type Product" name="Link_img" >`)
             res.writeHead(200, {'Content-type': 'text/html'});
             res.write(dataEdit);
             res.end();
@@ -79,7 +86,7 @@ class AdminProductController extends BaseController {
     async addProduct(req, res) {
         let urlPath = req.method
         if (urlPath === 'GET') {
-            let dataRegister = await _handle.getTemplate('./view/addproduct.html')
+            let dataRegister = await _handle.getTemplate('./view/admin/addproduct.html')
             res.writeHead(200, {'Content-type': 'text/html'});
             res.write(dataRegister);
             res.end();

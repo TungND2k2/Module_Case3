@@ -3,13 +3,19 @@ const PORT = 8000;
 const url = require('url');
 const OrderController = require("./controller/UserPage.controller");
 const orderController = new OrderController()
+
 const adminController = require('./controller/Admin.Home.controller')
 const AdminController = new adminController()
-const userController = new adminController()
 const UserController = require("./controller/User.controller");
 const user_Controller = new UserController()
+
+
+
+
+
 const adminProductController = require('./controller/Admin.product.controller');
 const  AdminProductController = new adminProductController()
+
 const server = http.createServer((req, res) => {
 
     let urlPath = url.parse(req.url);
@@ -23,14 +29,13 @@ const server = http.createServer((req, res) => {
         case '/forgot':
             user_Controller.forgot(req, res);
             break;
-        case '/show/user':
+        case '/show/users':
             AdminController.showUser(req, res);
             break;
 
         case '/delete/user':
             console.log(1)
             AdminController.deleteUser(req, res);
-
             break;
         case '/search':
             orderController.searchData(req, res)
@@ -38,8 +43,6 @@ const server = http.createServer((req, res) => {
         case '/home':
             orderController.mainPage(req, res);
             break;
-
-
         case'/product':
             AdminProductController.showProduct(req, res);
             break;
@@ -55,9 +58,18 @@ const server = http.createServer((req, res) => {
         case '/logOut':
             user_Controller.logout(req, res);
             break;
+        case'/info':
+            orderController.InfoUser(req,res);
+            break;
+        case'/edit/user':
+            orderController.editUser(req,res);
+            break;
+        default :
+            res.end();
+    }
 
 
-    }})
+})
 server.listen(PORT, 'localhost', () => {
     console.log('Server running on port ' + PORT)
 })

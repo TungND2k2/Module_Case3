@@ -30,7 +30,7 @@
              aria-haspopup="true" aria-expanded="false">Pages</a>
           <div class="dropdown-menu" aria-labelledby="dropdownId">
             <a class="dropdown-item" href="/orders">User Manager</a>
-            <a class="dropdown-item" href="#">Action 2</a>
+            <a class="dropdown-item" href="/logOut">LogOut</a>
           </div>
         </li>
       </ul>
@@ -42,30 +42,31 @@
   </nav>
   <div class="container">
     <div class="row">
-      <h2>Edit Product</h2>
+      <h2>Edit User</h2>
     </div>
   </div>
 </div>
 
 <form method="post" action="">
-  <label for="input1">Name Product</label>
+  <label >User Name</label>
   <div class="input-group mb-3">
-    <input id="input1" type="text" class="form-control" placeholder="Name product" name="Productname" >
+    {input-name}
   </div>
-  <label for="input2">Price</label>
+  <label >Password</label>
   <div class="input-group mb-3">
-    <input id="input2" type="text" class="form-control" placeholder="Price Product" name="Price" >
+    {input-password}
   </div>
-  <label for="input3">Quantity</label>
+  <label >Email</label>
   <div class="input-group mb-3">
-    <input id="input3" type="text" class="form-control" placeholder="Quantity" name="Quantity" >
+    {input-email}
   </div>
-  <label for="input4">Type Product</label>
+  <label >Phone</label>
   <div class="input-group mb-3">
-    <input id="input4" type="text" class="form-control" placeholder="Type Product" name="Type_Product" >
+    {input-phone}
   </div>
+
   <div>
-    <a href="/edit" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">Edit</button></a>
+    <a href="/edit/user" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">Edit</button></a>
   </div>
 </form>
 
