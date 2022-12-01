@@ -1,18 +1,17 @@
 const http = require('http');
 const PORT = 8000;
 const url = require('url');
-
-
-
 const OrderController = require("./controller/UserPage.controller");
-const orderController=new OrderController()
+const orderController = new OrderController()
 
 const adminController = require('./controller/Admin.Home.controller')
+
+const AdminController = new adminController()
 const UserController = require("./controller/User.controller");
 const user_Controller = new UserController()
 
 
-const AdminController = new adminController()
+
 
 
 const adminProductController = require('./controller/Admin.product.controller');
@@ -36,7 +35,6 @@ const server = http.createServer((req, res) => {
             break;
 
         case '/delete/user':
-            console.log(1)
             AdminController.deleteUser(req, res);
             break;
         case '/search':
@@ -46,19 +44,25 @@ const server = http.createServer((req, res) => {
             orderController.mainPage(req, res);
             break;
         case'/product':
-            AdminProductController.showProduct(req,res);
+            AdminProductController.showProduct(req, res);
             break;
         case'/delete/product':
-            AdminProductController.deleteproduct(req,res);
+            AdminProductController.deleteproduct(req, res);
             break;
-        case'/add':
-           AdminProductController.addProduct(req,res);
+        case'/add/product':
+            AdminProductController.addProduct(req, res);
             break;
-        case'/edit':
-             AdminProductController.editProduct(req,res);
+        case'/edit/product':
+            AdminProductController.editProduct(req, res);
             break;
         case '/logOut':
             user_Controller.logout(req, res);
+            break;
+        case'/info/user':
+            orderController.InfoUser(req,res);
+            break;
+        case'/edit/user':
+            orderController.editUser(req,res);
             break;
         default :
             res.end();

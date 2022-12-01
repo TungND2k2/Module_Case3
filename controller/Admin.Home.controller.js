@@ -17,12 +17,14 @@ class AdminController extends BaseController {
             html += `<td>${user.ID_acc}</td>`;
             html += `<td>${user.user_name}</td>`;
             html += `<td>${user.password}</td>`;
+            html += `<td>${user.email}</td>`;
+            html += `<td>${user.phone}</td>`;
             html += `<td> <a href="/delete/user?id=${user.ID_acc}" onclick="return confirm('Are you sure ?')" <button class="btn btn-danger">Delete</button></a> </td>`;
 
             html += "</tr>";
         })
 
-        let data = await _handle.getTemplate('./view/showUser.html')
+        let data = await _handle.getTemplate('./view//admin/listUser.html')
         data = data.replace('{list-user}', html)
         res.writeHead(200, {'Content-type': 'text/html'});
         res.write(data);

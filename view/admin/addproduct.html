@@ -13,24 +13,22 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #2d2016;">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/show/users">Home</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
                 aria-controls="collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="/add/product">ADD Product</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Pages</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="/admin">User Manager</a>
-                        <a class="dropdown-item" href="/product">Product Manager</a>
+                        <a class="dropdown-item" href="/orders">User Manager</a>
+                        <a class="dropdown-item" href="/logOut">logOut</a>
                     </div>
                 </li>
             </ul>
@@ -40,8 +38,37 @@
             </form>
         </div>
     </nav>
-
+    <div class="container">
+        <div class="row">
+            <h2>Add Product</h2>
+        </div>
+    </div>
 </div>
+
+            <form method="post" action="">
+                <label for="input1" style="margin-left: 270px">Name Product</label>
+                <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
+                    <input id="input1" type="text" class="form-control" placeholder="Name product" name="Productname" >
+                </div>
+                <label for="input2" style="margin-left: 270px">Price</label>
+                <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
+                    <input id="input2" type="text" class="form-control" placeholder="Price Product" name="Price" >
+                </div>
+                <label for="input3" style="margin-left: 270px">Quantity</label>
+                <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
+                    <input id="input3" type="text" class="form-control" placeholder="Quantity" name="Quantity" >
+                </div>
+                <label for="input4" style="margin-left: 270px">Type Product</label>
+                <div class="input-group mb-3" style="width: 500px;margin-left: 270px">
+                    <input id="input4" type="text" class="form-control" placeholder="Type Product" name="Type_Product" >
+                </div>
+                <div>
+                <a style="margin-left: 270px" href="/add" onclick="return confirm('Are you sure ?')"><button class="btn btn-danger">ADD</button></a>
+                </div>
+            </form>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

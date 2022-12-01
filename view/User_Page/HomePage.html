@@ -23,20 +23,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/add/cart">Cart</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Settings</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="/infor"> Infor Customer</a>
-                        <a class="dropdown-item" href="/logOut"> LogOut</a>
-                    </div>
-                </li>
+
+
             </ul>
             <form class="form-inline my-2 my-lg-0" method="post" action="/search">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">{username}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                <a class="dropdown-item" href="/info/user"> Infor User</a>
+                <a class="dropdown-item" href="/logOut"> LogOut</a>
+
+            </div>
+        </li>
     </nav>
     <div class="container">
         <div class="row">
