@@ -54,7 +54,7 @@ class AdminProductController extends BaseController {
             let sqlpro = `select * from products where ID_product = ${id}`
             let product = await this.querySQL(sqlpro);
             let dataEdit = await _handle.getTemplate('./view/admin/editproduct.html')
-            dataEdit =dataEdit.replace('{input-name}', `<input width="100px" type="text" value="${product[0].name_product}" class="form-control" placlassNameder="Name Product" name="name">`);
+            dataEdit =dataEdit.replace('{input-name}', `<input width="100px" type="text" value="${product[0].name_product}" class="form-control" placeholder="Name Product" name="name">`);
             dataEdit = dataEdit.replace('{input-price}',`<input  type="text" value="${product[0].price_product}" class="form-control" placeholder="Price Product" name="Price" >`);
             dataEdit =dataEdit.replace('{input-quantity}',`<input  type="text" value="${product[0].quantity}" class="form-control" placeholder="Quantity" name="Quantity" >`);
             dataEdit = dataEdit.replace('{input-type}',`<input  type="text" value="${product[0].type_product}"  class="form-control" placeholder="Type Product" name="Type_Product" >`);
@@ -70,11 +70,12 @@ class AdminProductController extends BaseController {
             req.on('end', async () => {
 
                 let dataInfo = qs.parse(data);
-                let name = dataInfo.Productname;
+                let name = dataInfo.name;
                 let price = dataInfo.Price;
                 let quantity = dataInfo.Quantity;
                 let type = dataInfo.Type_Product;
-                let sql = `update products set name_product = '${name}',price_product = ${price},quantity = ${quantity},type_product = '${type}' where ID_product = ${id}`;
+                let link = dataInfo.Link_img;
+                let sql = `update products set name_product = '${name}',price_product = ${price},quantity = ${quantity},type_product = '${type}',link_img = '${link}' where ID_product = ${id}`;
                 let result = await this.querySQL(sql);
 
                 res.writeHead(301, {Location: '/product'})
@@ -101,8 +102,9 @@ class AdminProductController extends BaseController {
                 let price = dataInfo.Price;
                 let quantity = dataInfo.Quantity;
                 let type = dataInfo.Type_Product;
+                let link = dataInfo.link_img;
 
-                let sql = `Insert into products(name_product,price_product,quantity,type_product) value ('${name}', ${price},${quantity},'${type}')`;
+                let sql = `Insert into products(name_product,price_product,quantity,type_product,link_img) value ('${name}', ${price},${quantity},'${type}','${link}')`;
                 let result = await this.querySQL(sql);
 
                 res.writeHead(301, {Location: '/product'})
