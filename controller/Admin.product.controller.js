@@ -15,7 +15,7 @@ class AdminProductController extends BaseController {
             html += "<tr>";
 
             html += `<td>${product.ID_product}</td>`;
-            html += `<td><img src="${product.link_img}" alt=""></td>`;
+            html += `<td><img src="${product.link_img}" style="width: 250px;height: 250px" alt=""></td>`;
             html += `<td>${product.name_product}</td>`;
             html += `<td>${product.price_product}</td>`;
             html += `<td>${product.quantity}</td>`;
