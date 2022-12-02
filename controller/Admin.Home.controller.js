@@ -13,7 +13,6 @@ class AdminController extends BaseController {
 
         orders.forEach((user, index) => {
             html += "<tr>";
-
             html += `<td>${user.ID_acc}</td>`;
             html += `<td>${user.user_name}</td>`;
             html += `<td>${user.password}</td>`;

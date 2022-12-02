@@ -14,19 +14,24 @@ class OrderController extends BaseController {
         let html = "";
 
         orders.forEach((order, index) => {
-            html += "<tr>";
-            html += `<td>${index + 1}</td>`;
-            html += `<td><img src="${order.link_img}" alt=""></td>`;
-            html += `<td>${order.name_product}</td>`;
-            html += `<td>${order.price_product}</td>`;
-            html += `<td>${order.quantity}</td>`;
-            html += `<td>${order.type_product}</td>`;
-            html += `<td><a href="add?id=${order.ID_product}"><button class="btn btn-danger">Add</button></a></td>`
-            html += "</tr>";
+            html += `<div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">`;
+            html += `<div class="product"> <img src="${order.link_img}" alt="">   `;
+            html += `<ul class="d-flex align-items-center justify-content-center list-unstyled icons"> `;
+            html += `<li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>  `;
+            html += `<li class="icon mx-3"><span class="far fa-heart"></span></li> `;
+            html += `<li class="icon"><span class="fas fa-shopping-bag"></span></li>  `;
+            html += `</ul>   `;
+            html += `</div>   `;
+            html += `<div class="tag bg-red">${order.type_product}</div>  `;
+            html += `<div class="title pt-4 pb-1">${order.name_product}</div>   `;
+            html += `<div class="d-flex align-content-center justify-content-center"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> </div>   `;
+            html += `<div class="price">${order.price_product}</div>  `;
+            html += `</div>   `;
+
         })
 
-        let data = await _handle.getTemplate('./view/User_Page/HomePage.html')
-        data = data.replace('{list-user}', html)
+        let data = await _handle.getTemplate('./view/User_Page/UserPage.html')
+        data = data.replace(' {list-product}', html)
         data = data.replace('{username}', `<div>${getUserObj(req)?.username}</div>`)
         data = data.replace('{userId}', `<div>${user.user.userId}</div>`)
         res.writeHead(200, {'Content-type': 'text/html'});
@@ -49,19 +54,22 @@ class OrderController extends BaseController {
             let html = "";
 
             result.forEach((products, index) => {
-                html += "<tr>";
-                html += `<td>${index + 1}</td>`;
-                html += `<td><img src="${products.link_img}" alt=""></td>`;
-                html += `<td>${products.name_product}</td>`;
-                html += `<td>${products.price_product}</td>`;
-                html += `<td>${products.quantity}</td>`;
-                html += `<td>${products.type_product}</td>`;
-                html += `<td><a href="add/cart?id=${products.ID_product}"><button class="btn btn-danger">Add</button></a></td>`
-
-                html += "</tr>";
+                html += `<div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">`;
+                html += `<div class="product"> <img src="${products.link_img}" alt="">   `;
+                html += `<ul class="d-flex align-items-center justify-content-center list-unstyled icons"> `;
+                html += `<li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>  `;
+                html += `<li class="icon mx-3"><span class="far fa-heart"></span></li> `;
+                html += `<li class="icon"><span class="fas fa-shopping-bag"></span></li>  `;
+                html += `</ul>   `;
+                html += `</div>   `;
+                html += `<div class="tag bg-red">${products.type_product}</div>  `;
+                html += `<div class="title pt-4 pb-1">${products.name_product}</div>   `;
+                html += `<div class="d-flex align-content-center justify-content-center"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> </div>   `;
+                html += `<div class="price">${products.price_product}</div>  `;
+                html += `</div>   `;
             })
-            let dataSearch = await _handle.getTemplate('./view/User_Page/HomePage.html')
-            dataSearch = dataSearch.replace('{list-user}', html)
+            let dataSearch = await _handle.getTemplate('./view/User_Page/UserPage.html')
+            dataSearch = dataSearch.replace('{list-product}', html)
             res.writeHead(200, {'Content-type': 'text/html'});
             res.write(dataSearch);
             res.end();

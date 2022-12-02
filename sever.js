@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
             user_Controller.register(req, res);
             break;
         case '/recovery':
-            user_Controller.forgot(req, res);
+            user_Controller.recovery(req, res);
             break;
         case '/show/users':
             AdminController.showUser(req, res);

@@ -7,24 +7,32 @@ class UserController extends BaseController {
     async login(req, res) {
         if (req.method === 'GET') {
             let cookie = req.headers.cookie;
-            let sessionID = qs.parse(cookie).user;
-            let session=JSON.parse(sessionID).expires
-            console.log(session)
-            let dataFormLogin = await _handle.getTemplate('./view/User_Account/login.html');
-            fs.readFile("sessions/" + session + ".txt", 'utf8', (err, data) => {
-                if (err) {
-                    res.writeHead(200, {'Content-type': "text/html"});
-                    res.write(dataFormLogin);
-                    return res.end();
-                }
-                data = JSON.parse(data)
-                if (data.user.role === 1) {
-                    res.writeHead(301, {Location: '/show/users'});
-                } else {
-                    res.writeHead(301, {Location: '/home'});
-                }
-                res.end()
-            })
+            if (cookie){
+                let sessionID = qs.parse(cookie);
+                let session= JSON.parse(sessionID.user);
+                let sessionJSON=session.expires;
+                let dataFormLogin = await _handle.getTemplate('./view/User_Account/login.html');
+                fs.readFile("sessions/" + sessionJSON + ".txt", 'utf8', (err, data) => {
+                    if (err) {
+                        res.writeHead(200, {'Content-type': "text/html"});
+                        res.write(dataFormLogin);
+                        return res.end();
+                    }
+                    data = JSON.parse(data)
+                    if (data.user.role === 1) {
+                        res.writeHead(301, {Location: '/show/users'});
+                    } else {
+                        res.writeHead(301, {Location: '/home'});
+                    }
+                    res.end()
+                })}
+            else {
+                let dataFormLogin = await _handle.getTemplate('./view/User_Account/login.html');
+                res.writeHead(200, {'Content-type': "text/html"});
+                res.write(dataFormLogin);
+                return res.end();
+            }
+
         } else {
             let data = ""
             req.on('data', chunk => {
@@ -37,7 +45,6 @@ class UserController extends BaseController {
 
                 let sql = `SELECT COUNT(ID_acc) as totalUser FROM account WHERE user_name = "${dataLogin.username}" AND password = "${dataLogin.password}"`;
                 let result = await this.querySQL(sql);
-                console.log(role)
                 if (result[0].totalUser === 0) {
                     res.writeHead(301, {Location: '/login'})
                     res.end();
@@ -90,14 +97,12 @@ class UserController extends BaseController {
 
 async logout(req, res){
     let cookie = req.headers.cookie;
-    let sessionID = qs.parse(cookie).user;
-    let session=JSON.parse(sessionID).expires
-    console.log(session)
-    let dataFormLogin = await _handle.getTemplate('./view/User_Page/HomePage.html');
-    fs.unlink("sessions/" + session + ".txt", (err) => {
+    let sessionID = qs.parse(cookie);
+    let session= JSON.parse(sessionID.user)
+    let sessionJSON=session.expires
+    fs.unlink("sessions/" + sessionJSON + ".txt", (err) => {
         if (err) {
-            res.writeHead(200, {'Content-type': "text/html"});
-            res.write(dataFormLogin);
+            res.writeHead(301, {Location: '/home'})
             return res.end();
         }
         res.writeHead(301, {Location: '/login'});
@@ -148,7 +153,7 @@ async register(req, res){
 
     }
 }
-async forgot(req, res){
+async recovery(req, res){
     let urlPath = req.method
     if (urlPath === 'GET') {
         let dataRegister = await _handle.getTemplate('./view/User_Account/forgot_password.html')
