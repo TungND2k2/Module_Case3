@@ -139,7 +139,7 @@ class OrderController extends BaseController {
                 let sql = `update account set user_name = '${name}', password = '${password}',email = '${email}', phone = '${phone}'  where ID_acc = ${id} `;
                 let result = await this.querySQL(sql);
 
-                res.writeHead(301, {Location: '/info'})
+                res.writeHead(301, {Location: '/info/user'})
                 res.end();
             })
         }
